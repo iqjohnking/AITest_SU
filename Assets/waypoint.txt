@@ -1,0 +1,11 @@
+WayPoint_1 0 False 2 WayPoint_0 WayPoint_2 
+WayPoint_7 0 False 2 WayPoint_0 WayPoint_6 
+WayPoint_5 0 False 2 WayPoint_4 WayPoint_6 
+WayPoint_10 1 False 2 WayPoint_2 WayPoint_9 
+WayPoint_8 1 False 2 WayPoint_6 WayPoint_9 
+WayPoint_0 0 False 2 WayPoint_1 WayPoint_7 
+WayPoint_2 0 False 3 WayPoint_1 WayPoint_3 WayPoint_10 
+WayPoint_6 0 False 3 WayPoint_5 WayPoint_7 WayPoint_8 
+WayPoint_3 0 False 2 WayPoint_2 WayPoint_4 
+WayPoint_4 0 False 2 WayPoint_3 WayPoint_5 
+WayPoint_9 2 False 2 WayPoint_8 WayPoint_10 
