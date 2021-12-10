@@ -2,26 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SteeringBehavior_Su 
+public class SteeringBehavior_Su
 {
     static public void Move(AI_Data_Su data)
     {
-        //§P©w¬O§_¦æ°Ê¤¤
+        //åˆ¤å®šæ˜¯å¦è¡Œå‹•ä¸­
         if (data.m_bMove == false)
         {
             return;
         }
-        //¦ì¸m/±ÛÂà³]¬°t
+        //ä½ç½®/æ—‹è½‰è¨­ç‚ºt
         Transform t = data.m_gObject.transform;
-        //²{¦b¦ì¸m
+        //ç¾åœ¨ä½ç½®
         Vector3 cPos = data.m_gObject.transform.position;
-        //steer¦V¶q(steer?)
+        //steerå‘é‡(steer?)
         Vector3 vR = t.right;
-        //"­ì¥ı"«e¶i¦V¶q
+        //"åŸå…ˆ"å‰é€²å‘é‡
         Vector3 vOriF = t.forward;
-        //«e¶i¦V¶q
+        //å‰é€²å‘é‡
         Vector3 vF = data.m_vCurrentVector;
-        //­­¨î±ÛÂà¤O¹D
+        //é™åˆ¶æ—‹è½‰åŠ›é“
         if (data.m_fTempTurnForce > data.m_fMaxRot)
         {
             data.m_fTempTurnForce = data.m_fMaxRot;
@@ -30,16 +30,16 @@ public class SteeringBehavior_Su
         {
             data.m_fTempTurnForce = -data.m_fMaxRot;
         }
-        //«e¶i¦V¶q = ¦V«e + steer¦V¶q*Âà¦V¤O¹D
+        //å‰é€²å‘é‡ = å‘å‰ + steerå‘é‡*è½‰å‘åŠ›é“
         vF = vF + vR * data.m_fTempTurnForce;
-        //«e¶i¦V¶q ³æ¦ì¦V¶q¤Æ
+        //å‰é€²å‘é‡ å–®ä½å‘é‡åŒ–
         vF.Normalize();
-        //ª«¥ó¥¿«e¤è­±¬Û = «e¶i¦V¶q
+        //ç‰©ä»¶æ­£å‰æ–¹é¢ç›¸ = å‰é€²å‘é‡
         t.forward = vF;
 
-        //³t«× = ³t«× + «e¶i¤O¹D*³æ¦ì®É¶¡
+        //é€Ÿåº¦ = é€Ÿåº¦ + å‰é€²åŠ›é“*å–®ä½æ™‚é–“
         data.m_Speed = data.m_Speed + data.m_fMoveForce * Time.deltaTime;
-        //­­¨î³Ì°ª³t³Ì§C³t
+        //é™åˆ¶æœ€é«˜é€Ÿæœ€ä½é€Ÿ
         if (data.m_Speed < 0.01f)
         {
             data.m_Speed = 0.01f;
@@ -49,8 +49,8 @@ public class SteeringBehavior_Su
             data.m_Speed = data.m_fMaxSpeed;
         }
 
-        //¨¾¤î°»´ú¨ì»ÙÃªª««áºÆ¨g§İ°Ê
-        //¦pªG°»´ú¨ì»ÙÃªª«¡Aºû«ù­ì¥ı¤è¦V
+        //é˜²æ­¢åµæ¸¬åˆ°éšœç¤™ç‰©å¾Œç˜‹ç‹‚æŠ–å‹•
+        //å¦‚æœåµæ¸¬åˆ°éšœç¤™ç‰©ï¼Œç¶­æŒåŸå…ˆæ–¹å‘
         if (data.m_bCol == false)
         {
             Debug.Log("CheckCollision");
@@ -64,7 +64,7 @@ public class SteeringBehavior_Su
                 Debug.Log("CheckCollision true");
             }
         }
-        //¦pªG³t«×¹LºC¡Aª½±µ90«×ÂàÅs(f=r)
+        //å¦‚æœé€Ÿåº¦éæ…¢ï¼Œç›´æ¥90åº¦è½‰å½(f=r)
         else
         {
             if (data.m_Speed < 0.02f)
@@ -80,91 +80,91 @@ public class SteeringBehavior_Su
 
             }
         }
-        //(·s)²{¦b¦ì¸m =  ²{¦b¦ì¸m  +  ¦V«e¦V¶q*¦V«e³t«×
+        //(æ–°)ç¾åœ¨ä½ç½® =  ç¾åœ¨ä½ç½®  +  å‘å‰å‘é‡*å‘å‰é€Ÿåº¦
         cPos = cPos + t.forward * data.m_Speed * Time.deltaTime;
-        //±q²{¦b¦ì¸m²¾°Ê¨ì·s¦ì¸m
+        //å¾ç¾åœ¨ä½ç½®ç§»å‹•åˆ°æ–°ä½ç½®
         t.position = cPos;
-        //²¾°Êªº¥»½è¬O´Â¤@­Ó¦V¶q¤£Â_ÅÜ¤Æ¦ì¸m¡C
+        //ç§»å‹•çš„æœ¬è³ªæ˜¯æœä¸€å€‹å‘é‡ä¸æ–·è®ŠåŒ–ä½ç½®ã€‚
     }
 
-    //¸I¼²°»´ú
+    //ç¢°æ’åµæ¸¬
     static public bool CheckCollision(AI_Data_Su data)
     {
-        //³Ğ«ØList<Obstacle>¡A¨ä¤¤ªºª«¥ó³£¬O°jÁ×ªº¥Ø¼Ğ
+        //å‰µå»ºList<Obstacle>ï¼Œå…¶ä¸­çš„ç‰©ä»¶éƒ½æ˜¯è¿´é¿çš„ç›®æ¨™
         List<Obstacle> m_AvoidTargets = Main.m_Instance.GetObstacles();
         if (m_AvoidTargets == null)
         {
             return false;
         }
         Transform ct = data.m_gObject.transform;
-        //ª«Åé²{¦b¦ì¸m
+        //ç‰©é«”ç¾åœ¨ä½ç½®
         Vector3 cPos = ct.position;
-        //ª«Åé­±¬Û¤è¦V
+        //ç‰©é«”é¢ç›¸æ–¹å‘
         Vector3 cForward = ct.forward;
         Vector3 vec;
 
         float fDist = 0.0f;
         float fDot = 0.0f;
-        //¨ú±o¸ÓList¤¤¦³´X­Óª«¥ó
+        //å–å¾—è©²Listä¸­æœ‰å¹¾å€‹ç‰©ä»¶
         int iCount = m_AvoidTargets.Count;
 
 
         for (int i = 0; i < iCount; i++)
         {
-            //°j°é¡A¥ş³¡ªº°jÁ×¥Ø¼Ğ¤§¦V¶q³£­n¶]¤@½ü
-            //¸Ô²Ó¹Ï§Î¨£µ§°O
+            //è¿´åœˆï¼Œå…¨éƒ¨çš„è¿´é¿ç›®æ¨™ä¹‹å‘é‡éƒ½è¦è·‘ä¸€è¼ª
+            //è©³ç´°åœ–å½¢è¦‹ç­†è¨˜
             vec = m_AvoidTargets[i].transform.position - cPos;
             vec.y = 0.0f;
             fDist = vec.magnitude;
 
-            //¦pªG¦Û¨­»P¥Ø¼Ğ¶ZÂ÷ > §Úªº½d³ò + ¥Ø¼Ğ½d³ò¡A«hµL¸I¼²
+            //å¦‚æœè‡ªèº«èˆ‡ç›®æ¨™è·é›¢ > æˆ‘çš„ç¯„åœ + ç›®æ¨™ç¯„åœï¼Œå‰‡ç„¡ç¢°æ’
             if (fDist > data.m_fProbeLength + m_AvoidTargets[i].m_fRadius)
             {
                 m_AvoidTargets[i].m_eState = Obstacle.eState.OUTSIDE_TEST;
                 continue;
-                //§PÂ_µL¸I¼²,¶i¤J¤U¤@½ü°j°é
+                //åˆ¤æ–·ç„¡ç¢°æ’,é€²å…¥ä¸‹ä¸€è¼ªè¿´åœˆ
             }
 
-            //³æ¦ì¤Æ¦V¶q
+            //å–®ä½åŒ–å‘é‡
             vec.Normalize();
-            //Dot ÂI¤º¿n
+            //Dot é»å…§ç©
             fDot = Vector3.Dot(vec, cForward);
             if (fDot < 0)
             {
                 m_AvoidTargets[i].m_eState = Obstacle.eState.OUTSIDE_TEST;
                 continue;
-                //§PÂ_µL¸I¼²,¶i¤J¤U¤@½ü°j°é
+                //åˆ¤æ–·ç„¡ç¢°æ’,é€²å…¥ä¸‹ä¸€è¼ªè¿´åœˆ
             }
             m_AvoidTargets[i].m_eState = Obstacle.eState.INSIDE_TEST;
 
-            //¦pªG»ÙÃªª«¶ZÂ÷±´°wªºª½½u¶ZÂ÷ > ¥»Åé + ¥Ø¼Ğ¥b®|¡A«hµL¸I¼²
+            //å¦‚æœéšœç¤™ç‰©è·é›¢æ¢é‡çš„ç›´ç·šè·é›¢ > æœ¬é«” + ç›®æ¨™åŠå¾‘ï¼Œå‰‡ç„¡ç¢°æ’
             float fProjDist = fDist * fDot;
             float fDotDist = Mathf.Sqrt(fDist * fDist - fProjDist * fProjDist);
             if (fDotDist > m_AvoidTargets[i].m_fRadius + data.m_fRadius)
             {
                 continue;
-                //§PÂ_µL¸I¼²,¶i¤J¤U¤@½ü°j°é
+                //åˆ¤æ–·ç„¡ç¢°æ’,é€²å…¥ä¸‹ä¸€è¼ªè¿´åœˆ
             }
-            //¦pªG«e­±¦³continue¡A¥Nªí³o¤@¦ætrue¤£·|³Qreturn¡A
-            //¦Ó¬O°j°é¥~ªºfalse³Qreturn¡C
+            //å¦‚æœå‰é¢æœ‰continueï¼Œä»£è¡¨é€™ä¸€è¡Œtrueä¸æœƒè¢«returnï¼Œ
+            //è€Œæ˜¯è¿´åœˆå¤–çš„falseè¢«returnã€‚
             return true;
         }
         return false;
     }
 
-    //¸I¼²°jÁ×
+    //ç¢°æ’è¿´é¿
     static public bool CollisionAvoid(AI_Data_Su data)
     {
         List<Obstacle> m_AvoidTargets = Main.m_Instance.GetObstacles();
         Transform ct = data.m_gObject.transform;
-        //ª«Åé²{¦b¦ì¸m
+        //ç‰©é«”ç¾åœ¨ä½ç½®
         Vector3 cPos = ct.position;
-        //ª«Åé­±¬Û¤è¦V
+        //ç‰©é«”é¢ç›¸æ–¹å‘
         Vector3 cForward = ct.forward;
         data.m_vCurrentVector = cForward;
         Vector3 vec;
 
-        //¸Ô²Ó¹Ï§Î¨£µ§°O
+        //è©³ç´°åœ–å½¢è¦‹ç­†è¨˜
         float fFinalDotDist;
         float fFinalProjDist;
         Vector3 vFinalVec = Vector3.forward;
@@ -173,7 +173,7 @@ public class SteeringBehavior_Su
         float fDist = 0.0f;
         float fDot = 0.0f;
         float fFinalDot = 0.0f;
-        //¨ú±o¸ÓList¤¤¦³´X­Óª«¥ó
+        //å–å¾—è©²Listä¸­æœ‰å¹¾å€‹ç‰©ä»¶
         int iCount = m_AvoidTargets.Count;
 
         //???
@@ -183,11 +183,11 @@ public class SteeringBehavior_Su
             vec = m_AvoidTargets[i].transform.position - cPos;
             vec.y = 0.0f;
             fDist = vec.magnitude;
-            //¥»Åé»P¥Ø¼Ğ¶ZÂ÷ > ¥»Åé + ¥Ø¼Ğ¥b®|
+            //æœ¬é«”èˆ‡ç›®æ¨™è·é›¢ > æœ¬é«” + ç›®æ¨™åŠå¾‘
             if (fDist > data.m_fProbeLength + m_AvoidTargets[i].m_fRadius)
             {
                 m_AvoidTargets[i].m_eState = Obstacle.eState.OUTSIDE_TEST;
-                //§PÂ_µL¸I¼²,¶i¤J¤U¤@½ü°j°é
+                //åˆ¤æ–·ç„¡ç¢°æ’,é€²å…¥ä¸‹ä¸€è¼ªè¿´åœˆ
                 continue;
             }
 
@@ -196,7 +196,7 @@ public class SteeringBehavior_Su
             if (fDot < 0)
             {
                 m_AvoidTargets[i].m_eState = Obstacle.eState.OUTSIDE_TEST;
-                //§PÂ_µL¸I¼²,¶i¤J¤U¤@½ü°j°é
+                //åˆ¤æ–·ç„¡ç¢°æ’,é€²å…¥ä¸‹ä¸€è¼ªè¿´åœˆ
                 continue;
             }
             else if (fDot > 1.0f)
@@ -209,11 +209,11 @@ public class SteeringBehavior_Su
             float fDotDist = Mathf.Sqrt(fDist * fDist - fProjDist * fProjDist);
             if (fDotDist > m_AvoidTargets[i].m_fRadius + data.m_fRadius)
             {
-                //§PÂ_µL¸I¼²,¶i¤J¤U¤@½ü°j°é
+                //åˆ¤æ–·ç„¡ç¢°æ’,é€²å…¥ä¸‹ä¸€è¼ªè¿´åœˆ
                 continue;
             }
 
-            //¤W­z³£continue¥¼°õ¦æ¡A¥Nªí¥i¯à¦³¸I¼²¡A°õ¦æ¥H¤Uµ{¦¡
+            //ä¸Šè¿°éƒ½continueæœªåŸ·è¡Œï¼Œä»£è¡¨å¯èƒ½æœ‰ç¢°æ’ï¼ŒåŸ·è¡Œä»¥ä¸‹ç¨‹å¼
             if (fDist < fMinDist)
             {
                 fMinDist = fDist;
@@ -227,11 +227,11 @@ public class SteeringBehavior_Su
 
         if (oFinal != null)
         {
-            //ºâ¥~¿n¡A¨M©w¤è¦V
+            //ç®—å¤–ç©ï¼Œæ±ºå®šæ–¹å‘
             Vector3 vCross = Vector3.Cross(cForward, vFinalVec);
-            //ºâ¥XÂàÅsªº¤O¹D
+            //ç®—å‡ºè½‰å½çš„åŠ›é“
             float fTurnMag = Mathf.Sqrt(1.0f - fFinalDot * fFinalDot);
-            //¥~¿n¤j©ó¹s¡A¥Nªíª«Åé¦b¥k¤è¡A©Ò¥H­n°k¦V¥ª¤è
+            //å¤–ç©å¤§æ–¼é›¶ï¼Œä»£è¡¨ç‰©é«”åœ¨å³æ–¹ï¼Œæ‰€ä»¥è¦é€ƒå‘å·¦æ–¹
             if (vCross.y > 0.0f)
             {
                 fTurnMag = -fTurnMag;
@@ -262,7 +262,7 @@ public class SteeringBehavior_Su
         vec.y = 0.0f;
         float fDist = vec.magnitude;
         data.m_fTempTurnForce = 0.0f;
-        //¦pªG¦³"¥Ø¼Ğ"¦b±´°w¤º«h´î³t
+        //å¦‚æœæœ‰"ç›®æ¨™"åœ¨æ¢é‡å…§å‰‡æ¸›é€Ÿ
         if (data.m_fProbeLength < fDist)
         {
             if (data.m_Speed > 0.01f)
@@ -278,10 +278,10 @@ public class SteeringBehavior_Su
         Vector3 vr = data.m_gObject.transform.right;
         data.m_vCurrentVector = vf;
         vec.Normalize();
-        //¤º¿n
+        //å…§ç©
         float fDotF = Vector3.Dot(vf, vec);
 
-        //¦º°Ï
+        //æ­»å€
         if (fDotF < -0.995f)
         {
             fDotF = -1.0f;
@@ -324,13 +324,13 @@ public class SteeringBehavior_Su
     static public bool Seek(AI_Data_Su data)
     {
         Vector3 cPos = data.m_gObject.transform.position;
-        //¦V¥Ø¼Ğªº¤Ş¤O
+        //å‘ç›®æ¨™çš„å¼•åŠ›
         Vector3 vec = data.m_vTarget - cPos;
-        //y¶b©T©w
+        //yè»¸å›ºå®š
         vec.y = 0.0f;
-        //¦V¶qªø«×(¶ZÂ÷)
+        //å‘é‡é•·åº¦(è·é›¢)
         float fDist = vec.magnitude;
-        //¦pªG¦V¶qªø«× ¤p©ó ³t«×+0.001f¡Aª½±µ²¾°Ê¨ì¥Ø¼Ğ
+        //å¦‚æœå‘é‡é•·åº¦ å°æ–¼ é€Ÿåº¦+0.001fï¼Œç›´æ¥ç§»å‹•åˆ°ç›®æ¨™
         if (fDist < data.m_Speed * Time.deltaTime + 0.001f)
         {
             Vector3 vFinal = data.m_vTarget;
@@ -348,7 +348,7 @@ public class SteeringBehavior_Su
         vec.Normalize();
 
         float fDotF = Vector3.Dot(vf, vec);
-        //Âà¦V¥Ø¼Ğªº¦º°Ï
+        //è½‰å‘ç›®æ¨™çš„æ­»å€
         if (fDotF > 0.995f)
         {
             fDotF = 1.0f;
@@ -376,7 +376,7 @@ public class SteeringBehavior_Su
                     fDotR = -1.0f;
                 }
             }
-            //¼W¥[µu¶ZÂ÷ªºÂà¦V¤O
+            //å¢åŠ çŸ­è·é›¢çš„è½‰å‘åŠ›
             if (fDist < 3.0f)
             {
                 fDotR *= (fDist / 3.0f + 1.0f);
@@ -384,7 +384,7 @@ public class SteeringBehavior_Su
             data.m_fTempTurnForce = fDotR;
         }
 
-        //¦pªG¶ZÂ÷«Üµu´N´î³t
+        //å¦‚æœè·é›¢å¾ˆçŸ­å°±æ¸›é€Ÿ
         if (fDist < 3.0f)
         {
             Debug.Log(data.m_Speed);

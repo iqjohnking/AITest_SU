@@ -16,16 +16,16 @@ public class WayPoint : MonoBehaviour
     }
 
     /// <summary>
-    /// if(¨¾§b¡A½T©w¦³m_Neibors¦b®ÇÃä)
-    /// foreach(¨C¤@­Ó¦bm_Neibors¤¤ªºgo)
-    /// GizmoÃC¦â¬°ÂÅ
-    /// µeGizmo½u¡A¥Hthis¬°°_ÂI¡Ago¬°²×ÂI¡C
+    /// if(é˜²å‘†ï¼Œç¢ºå®šæœ‰m_Neiborsåœ¨æ—é‚Š)
+    /// foreach(æ¯ä¸€å€‹åœ¨m_Neiborsä¸­çš„go)
+    /// Gizmoé¡è‰²ç‚ºè—
+    /// ç•«Gizmoç·šï¼Œä»¥thisç‚ºèµ·é»ï¼Œgoç‚ºçµ‚é»ã€‚
     /// </summary>
     private void OnDrawGizmos()
     {
-        if(m_Neibors != null && m_Neibors.Count > 0)
+        if (m_Neibors != null && m_Neibors.Count > 0)
         {
-            foreach(GameObject go in m_Neibors)
+            foreach (GameObject go in m_Neibors)
             {
                 Gizmos.color = Color.blue;
                 Gizmos.DrawLine(this.transform.position, go.transform.position);

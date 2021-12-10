@@ -14,12 +14,12 @@ public class Main : MonoBehaviour
         m_Instance = this;
     }
 
-    // ¥ÎStart¨Ó¹êÅé¤Æ(Initialization)ª«¥ó
+    // ç”¨Startä¾†å¯¦é«”åŒ–(Initialization)ç‰©ä»¶
     void Start()
     {
         m_Obstacles = new List<Obstacle>();
         GameObject[] gObjectS = GameObject.FindGameObjectsWithTag("Obstacle");
-        //¦pªG³o°}¦C·í¤¤¦³ª«¥ó¡A«h¥ÎforeachÀ°¨C­Óª«¥ó®M¤W
+        //å¦‚æžœé€™é™£åˆ—ç•¶ä¸­æœ‰ç‰©ä»¶ï¼Œå‰‡ç”¨foreachå¹«æ¯å€‹ç‰©ä»¶å¥—ä¸Š
         if (gObjectS != null || gObjectS.Length > 0)
         {
             Debug.Log(gObjectS.Length);
@@ -43,6 +43,6 @@ public class Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

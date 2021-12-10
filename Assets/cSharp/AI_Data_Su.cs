@@ -5,57 +5,57 @@ using UnityEngine;
 [System.Serializable]
 public class AI_Data_Su
 {
-    //¥b®|
+    //åŠå¾‘
     public float m_fRadius;
-    //±´°wªø«×
+    //æ¢é‡é•·åº¦
     public float m_fProbeLength;
-    //³t«×
+    //é€Ÿåº¦
     public float m_Speed;
-    //³Ì°ª³t
+    //æœ€é«˜é€Ÿ
     public float m_fMaxSpeed;
-    //Âà¦V
+    //è½‰å‘
     public float m_fRot;
-    //³Ì¤jÂà¦V
+    //æœ€å¤§è½‰å‘
     public float m_fMaxRot;
     public GameObject m_gObject;
 
-    //µø³¥
+    //è¦–é‡
     public float m_fSight;
-    //§ğÀ»¶ZÂ÷
+    //æ”»æ“Šè·é›¢
     public float m_fAttackRange;
 
     [HideInInspector]
-    //§ğÀ»®É¶¡(¼È®É¥¼¥Î
+    //æ”»æ“Šæ™‚é–“(æš«æ™‚æœªç”¨
     public float m_fAttackTime;
-    //¥Í©R­È(¼È®É¥¼¥Î
+    //ç”Ÿå‘½å€¼(æš«æ™‚æœªç”¨
     public float m_fHp;
     [HideInInspector]
-    //¥Ø¼Ğ
+    //ç›®æ¨™
     public GameObject m_TargetObject;
 
     [HideInInspector]
-    //¥Ø¼Ğ¤§¦V¶q
+    //ç›®æ¨™ä¹‹å‘é‡
     public Vector3 m_vTarget;
     [HideInInspector]
-    //¥Ø¼Ğ¤§²{¦b¦V¶q(?
+    //ç›®æ¨™ä¹‹ç¾åœ¨å‘é‡(?
     public Vector3 m_vCurrentVector;
     [HideInInspector]
-    //¼È®ÉÂà¦V¤O
+    //æš«æ™‚è½‰å‘åŠ›
     public float m_fTempTurnForce;
     [HideInInspector]
-    //«e¶i¤O¹D
+    //å‰é€²åŠ›é“
     public float m_fMoveForce;
     [HideInInspector]
-    //bool ¬O§_²¾°Ê(??
+    //bool æ˜¯å¦ç§»å‹•(??
     public bool m_bMove;
 
     [HideInInspector]
-    //»ÙÃªª«
+    //éšœç¤™ç‰©
     public bool m_bCol;
 
     //[HideInInspector]
-    //¦³­­ª¬ºA¾÷
+    //æœ‰é™ç‹€æ…‹æ©Ÿ
     //public FSMSystem m_FSMSystem;
-    //¼È®É¥¼¥Î
+    //æš«æ™‚æœªç”¨
     //public BT.cBTSystem m_BTSystem;
 }
