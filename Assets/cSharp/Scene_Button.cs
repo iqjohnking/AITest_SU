@@ -5,14 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class Scene_Button : MonoBehaviour
 {
-    public void toseek(string name)
-        {
-            SceneManager.LoadScene(name);
-        }
-    void Awake()
+    //避免回到開頭無限重生ui系統
+    //此為singleton寫法之一，要再研究各種寫法差別。
+    public static Scene_Button Instance { get; set; }
+    private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-        return;
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
+
+    public void ChangeScene(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
+
 }
 
