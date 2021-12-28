@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class PurpleCubes : MonoBehaviour
 {
-    //checkpointªº­p¼Æ¾¹
-    //List¥Î¨Ó¸Ëcheckpoint
+    //checkpointçš„è¨ˆæ•¸å™¨
+    //Listç”¨ä¾†è£checkpoint
     int checkPointNum = 0;
     List<string> CheckPoints;
 
     [SerializeField]
     float speed = 10f;
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
