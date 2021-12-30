@@ -54,6 +54,7 @@ public class SpawnPoint : MonoBehaviour
         }
         //目標 = 資源池中第一個為否的物件
         var target = objectPool.First(o => o.isUsing == false);
+        //防呆
         if (target == null) return;
         //將此物件變成true，並將此物件打開
         target.isUsing = true;

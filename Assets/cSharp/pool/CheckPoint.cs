@@ -17,7 +17,6 @@ public class CheckPoint : MonoBehaviour
         for (int i = 10; i < Name.Length; i++)
         {
             //(string getNum) = (string getNum) + (string Name[i])
-            //也就是說命名方式是getNum後掛數字
             getNum += Name[i];
         }
         //將string getNum 轉型，放入num

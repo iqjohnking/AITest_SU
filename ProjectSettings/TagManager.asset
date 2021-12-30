@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Wall
-  - WayPoint
+  - NPC
   - Obstacle
+  - unloadpoint
   layers:
   - Default
   - TransparentFX

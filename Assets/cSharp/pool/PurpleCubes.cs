@@ -13,31 +13,56 @@ public class PurpleCubes : MonoBehaviour
     [SerializeField]
     float speed = 10f;
 
+    public Vector3 nextSpawnPoint;
+
+
+
+
+
     void Start()
     {
-        
-    }
+        CheckPoints = new List<string>();
+        var CheckSet = FindObjectsOfType<CheckPoint>();
 
+        while (CheckPoints.Count < CheckSet.Length)
+        {
+            for (int i = 0; i < CheckSet.Length; i++)
+            {
+                if (PointNum == CheckSet[i].GetNum)
+                {
+                    CheckPoints.Add(CheckSet[i].gameObject.name);
+                }
+            }
+            PointNum++;
+        }
+
+        if (CheckSet.Length > 0)
+        {
+            target = GameObject.Find("CheckPoint1").transform;
+        }
+        else
+        {
+            target = GameObject.Find("End").transform;
+        }
+    }
     void Update()
     {
-        
+        MoveTo(target.position);
     }
+
+
 
     void MoveTo(Vector3 destination)
     {
         //Vector3.Distance() 求長度
         //設定死區以防呆
         if (Vector3.Distance(transform.position, destination) < 0.1f) return;
-        //調整物件朝向，一種有Lerp一種沒有
-        Vector3.Lerp(transform.forward, (destination - transform.position).normalized, Time.deltaTime);
         transform.forward = (destination - transform.position).normalized;
 
         transform.position += transform.forward * speed * Time.deltaTime;
     }
 
-
-
-    //被collier碰撞到目標的時候
+    
     private void OnTriggerEnter(Collider other)
     {
         //只在這裡運作的function
@@ -53,7 +78,7 @@ public class PurpleCubes : MonoBehaviour
                 {
                     if (key + 1 > (checks.Count - 1))
                     {
-                        target = GameObject.Find("Sphere").transform;
+                        target = GameObject.Find("End").transform;
                         return;
                     }
                     target = GameObject.Find(checks[key + 1]).transform;
@@ -62,7 +87,9 @@ public class PurpleCubes : MonoBehaviour
             }
         }
         pathRun(CheckPoints, 0);
-        if (other.name == "Sphere")
+        
+        
+        if (other.name == "End")
         {
             if (CheckPoints.Count > 0)
             {
@@ -70,9 +97,19 @@ public class PurpleCubes : MonoBehaviour
             }
             else
             {
-                target = GameObject.Find("Sphere").transform;
+                target = GameObject.Find("End").transform;
             }
+            
         }
+
+        if (other.tag == "unloadpoint")
+        {
+            var loader = FindObjectOfType<SpawnPoint>();
+            loader.Unload(this.gameObject);
+            this.gameObject.transform.position = nextSpawnPoint;
+        }
+
+        Debug.Log(target);
     }
 
 
